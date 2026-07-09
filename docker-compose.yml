@@ -1,0 +1,40 @@
+services:
+  player-service:
+    build: ./player-service
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./player-service/.env
+    sysctls:
+      - net.ipv4.tcp_syn_retries=2
+    restart: unless-stopped
+
+  config-service:
+    build: ./config-service
+    ports:
+      - "8001:8001"
+    env_file:
+      - ./config-service/.env
+    sysctls:
+      - net.ipv4.tcp_syn_retries=2
+    restart: unless-stopped
+
+  economy-service:
+    build: ./economy-service
+    ports:
+      - "8002:8002"
+    env_file:
+      - ./economy-service/.env
+    sysctls:
+      - net.ipv4.tcp_syn_retries=2
+    restart: unless-stopped
+
+  match-service:
+    build: ./match-service
+    ports:
+      - "8003:8003"
+    env_file:
+      - ./match-service/.env
+    sysctls:
+      - net.ipv4.tcp_syn_retries=2
+    restart: unless-stopped

@@ -1,0 +1,24 @@
+import uuid
+from datetime import datetime
+
+from sqlalchemy import Integer, DateTime, ForeignKey, func
+from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy.orm import Mapped, mapped_column, relationship
+
+from app.models import Base
+
+
+class PlayerRank(Base):
+    __tablename__ = "player_rank"
+
+    player_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), ForeignKey("player_profile.player_id", ondelete="CASCADE"), primary_key=True)
+    season_id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    rank_id: Mapped[int] = mapped_column(Integer, nullable=False)
+    current_point: Mapped[int] = mapped_column(Integer, default=0)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
+    updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
+
+    player: Mapped["PlayerProfile"] = relationship(back_populates="ranks")
+
+
+from app.models.player_profile import PlayerProfile  # noqa: E402
