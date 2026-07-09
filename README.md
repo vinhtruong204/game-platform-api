@@ -1,6 +1,8 @@
-# Multiplayer Game Platform — API
+# Knockback — Game Platform API
 
-The backend API layer for a multiplayer game platform, built as **four independent FastAPI microservices**, each with its own PostgreSQL database. Services are fully decoupled — there are no HTTP calls between them, and each owns its own schema and migrations.
+The backend API layer for **[Knockback](https://github.com/vinhtruong204/knockback-godot)**, a networked multiplayer 2D action game. Built as **four independent FastAPI microservices**, each with its own PostgreSQL database. Services are fully decoupled — there are no HTTP calls between them, and each owns its own schema and migrations.
+
+> **Game client:** the Godot 4.6 client that consumes this API lives in **[knockback-godot](https://github.com/vinhtruong204/knockback-godot)**. See [Related Repositories](#related-repositories).
 
 ## Services
 
@@ -148,6 +150,15 @@ Additional **additive/idempotent** seed scripts (run after `seed_data.py`):
 ├── seed_*.py           # additional idempotent seeders
 └── docker-compose.yml  # runs all four services
 ```
+
+## Related Repositories
+
+| Repository | Role |
+|------------|------|
+| **[knockback-godot](https://github.com/vinhtruong204/knockback-godot)** | The **game client** — a Godot 4.6 (Mobile renderer) multiplayer 2D action game that consumes this API for auth, profiles, config, economy, and match data. |
+| **game-platform-api** *(this repo)* | The **backend** — four FastAPI microservices on ports 8000–8003. |
+
+The client maps to the services as follows: its `PlayerApi` → `player-service` (8000), `ConfigApi` → `config-service` (8001), `EconomyApi` → `economy-service` (8002), and `MatchApi` → `match-service` (8003). See the client's [README](https://github.com/vinhtruong204/knockback-godot#backend-api) for details.
 
 ## Notes
 
