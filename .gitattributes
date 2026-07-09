@@ -1,0 +1,29 @@
+# Normalize line endings: Git stores text as LF, checks out native on each OS.
+* text=auto
+
+# Explicitly treat these as text (LF in the repo).
+*.py    text
+*.md    text
+*.txt   text
+*.ini   text
+*.cfg   text
+*.toml  text
+*.yml   text
+*.yaml  text
+*.json  text
+*.mako  text
+*.sql   text
+Dockerfile      text
+.dockerignore   text
+.gitignore      text
+.gitattributes  text
+
+# Treat these as binary (never munge line endings).
+*.tar   binary
+*.gz    binary
+*.zip   binary
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.gif   binary
+*.ico   binary
